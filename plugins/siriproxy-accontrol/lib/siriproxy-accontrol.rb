@@ -18,7 +18,7 @@ class SiriProxy::Plugin::ACControl < SiriProxy::Plugin
   end
     
   # listener for activating the ac
-  listen_for /ac on/i do
+  listen_for /power on/i do
     say "Air conditioner activated!", spoken: "Air conditioner activated!"
     request_completed
     # TODO: either direct eibd command or JSON request
@@ -26,7 +26,7 @@ class SiriProxy::Plugin::ACControl < SiriProxy::Plugin
   end
 
   # listener for deactivating the ac
-  listen_for /ac off/i do
+  listen_for /power off/i do
     say "Air conditioner deactivated!", spoken: "Air conditioner!"
     request_completed
     # TODO: either direct eibd command or JSON request
