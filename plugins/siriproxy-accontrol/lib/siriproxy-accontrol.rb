@@ -18,23 +18,23 @@ class SiriProxy::Plugin::ACControl < SiriProxy::Plugin
   end
     
   # listener for activating the ac
-  listen_for /power on/i do
-    say "Air conditioner activated!", spoken: "Air conditioner activated!"
+  listen_for /einschalten/i do
+    say "Klimaanlage wurde eingeschaltet!", spoken: "Klimaanlage wurde eingeschaltet!"
     request_completed
-    system("ssh knxmaster@192.168.1.6 -t 'groupswrite ip:127.0.0.1 1/0/0 1'")
+    system("groupswrite ip:127.0.0.1 1/0/0 1")
   end
 
   # listener for deactivating the ac
-  listen_for /power off/i do
-    say "Air conditioner deactivated!", spoken: "Air conditioner deactivated!"
+  listen_for /ausschalten/i do
+    say "Klimaanlage wurde ausgeschaltet!", spoken: "Klimaanlage wurde ausgeschaltet!"
     request_completed
-    system("ssh knxmaster@192.168.1.6 -t 'groupswrite ip:127.0.0.1 1/0/0 0'")
+    system("groupswrite ip:127.0.0.1 1/0/0 0")
   end
 
   # listener for activating the eibd server
-  listen_for /eibd on/i do
-    say "Eibd activated!", spoken: "Eibd activated!"
+  listen_for /knx einschalten/i do
+    say "Eibd wurde eingeschaltet!", spoken: "Eibd wurde eingeschaltet!"
     request_completed
-    system("ssh knxmaster@192.168.1.6 -t 'eibd -c -d/LOG-DIR/log.txt -i -S -D --no-tunnel-client-queuing -R -T'")
+    system("eibd")
   end
 end
